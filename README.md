@@ -6,5 +6,5 @@ El proyecto consta de un CRUD de personas  siguiendo los principios SOLID,  dond
 //  TODO: Requisitos
 
 
-Video explicativo del proyecto
-<video src="ruta/al/video.mp4" width="600" controls></video>
+Video explicativo del proyecto:
+<video src="https://www.youtube.com/watch?v=GhQdlIFylQ8&t=12301s" width="600" controls></video>
