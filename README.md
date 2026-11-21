@@ -7,4 +7,5 @@ El proyecto consta de un CRUD de personas  siguiendo los principios SOLID,  dond
 
 
 Video explicativo del proyecto:
-[Ver video]([https://ejemplo.com](https://www.youtube.com/watch?v=GhQdlIFylQ8&t=12301s))
+[Ver video](https://www.youtube.com/watch?v=GhQdlIFylQ8&t=12301s)
+
