@@ -18,7 +18,5 @@ El sistema implementa un módulo integral para la administración de personas (C
 
 ---
 
-Video explicativo del proyecto:
+## Video explicativo del proyecto:
 [Ver video](https://www.youtube.com/watch?v=GhQdlIFylQ8&t=12301s)
-
----
