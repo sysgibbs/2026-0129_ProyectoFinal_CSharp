@@ -2,7 +2,7 @@
 
 ## Descripcion del proyecto:
 
-Este repositorio contiene el **Proyecto Final de la asignatura Lenguaje de Programación I**. Corresponde a una aplicación web monolítica desarrollada en **C#** bajo el patrón **ASP.NET MVC**, apoyándose en **Entity Framework** como  ) y **Microsoft SQL Server**.
+Este repositorio contiene el **Proyecto Final de la asignatura Lenguaje de Programación I**. Corresponde a una aplicación web monolítica desarrollada en **C#** bajo el patrón **ASP.NET MVC**, apoyándose en **Entity Framework** y **Microsoft SQL Server**.
 
 El sistema implementa un módulo integral para la administración de personas (CRUD: *Create, Read, Update, Delete*), diseñado bajo los **Principios SOLID** de la ingeniería de software para garantizar un código desacoplado, mantenible y escalable. Incluye mecanismos de autenticación y autorización con control de accesos basado en roles (RBAC), generación de reportes operativos y optimización de consultas a base de datos.
 
@@ -15,13 +15,6 @@ El sistema implementa un módulo integral para la administración de personas (C
 - Optimización de Consultas
 - Entity Framework
 - Arquitectura Basada en SOLID
-
-## Autor y Créditos
-
-- **Nombre Completo**: German Alberto Defillo Gibbs Florian
-- **Matricula**: 2026-0129
-- **Materia**: Lenguaje de Programación I
-- **Proyecto**: Evaluación Final
 
 
 ## Video explicativo del proyecto:
