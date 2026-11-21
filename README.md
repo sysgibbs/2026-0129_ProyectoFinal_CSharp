@@ -6,17 +6,23 @@ Este repositorio contiene el **Proyecto Final de la asignatura Lenguaje de Progr
 
 El sistema implementa un módulo integral para la administración de personas (CRUD: *Create, Read, Update, Delete*), diseñado bajo los **Principios SOLID** de la ingeniería de software para garantizar un código desacoplado, mantenible y escalable. Incluye mecanismos de autenticación y autorización con control de accesos basado en roles (RBAC), generación de reportes operativos y optimización de consultas a base de datos.
 
-## Caracteristicas del proyecto: 
+## Caracteristicas del proyecto:
 
 - Gestión Integral de Personas (CRUD)
 - Autenticación y Seguridad
-- Control de Acceso Basado en Roles 
+- Control de Acceso Basado en Roles
 - Módulo de Reportes
-- Optimización de Consultas 
+- Optimización de Consultas
 - Entity Framework
 - Arquitectura Basada en SOLID
 
----
+## Autor y Créditos
+
+- **Nombre Completo**: German Alberto Defillo Gibbs Florian
+- **Matricula**: 2026-0129
+- **Materia**: Lenguaje de Programación I
+- **Proyecto**: Evaluación Final
+
 
 ## Video explicativo del proyecto:
 [Ver video](https://www.youtube.com/watch?v=GhQdlIFylQ8&t=12301s)
