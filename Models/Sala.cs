@@ -6,11 +6,9 @@ namespace CineMVC.Models
     {
 
         public int Id { get; set; }
-        
-        [Required, StringLength(50)]
-        public string Nombre { get; set; }
 
-        public int Cantidad { get; set; }
+        [Required, StringLength(50)]
+        public string Nombre { get; set; } = string.Empty;
 
         [StringLength(30)]
         public string? Tipo { get; set; }

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using CineMVC.Models;
-using CineMVC.Models.Enums;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace CineMVC.Data
 {

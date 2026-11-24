@@ -10,7 +10,7 @@ namespace CineMVC.Models
         public string Titulo { get; set; } = string.Empty;
 
         [StringLength(500)]
-        public string ? Sinposis { get; set; }
+        public string ? Sinopsis { get; set; }
 
         [StringLength(20)]
         public string? Clasificacion { get; set;  }
