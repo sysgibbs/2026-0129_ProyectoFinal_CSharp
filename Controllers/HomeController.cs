@@ -1,8 +1,8 @@
-using ColegioMVC.Models;
+using CineMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace ColegioMVC.Controllers
+namespace CineMVC.Controllers
 {
     public class HomeController : Controller
     {

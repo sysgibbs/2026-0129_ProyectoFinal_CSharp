@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace ColegioMVC.Data.Migrations
+namespace CineMVC.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

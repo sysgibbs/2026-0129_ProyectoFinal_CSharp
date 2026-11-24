@@ -1,4 +1,4 @@
-namespace ColegioMVC.Models
+namespace CineMVC.Models
 {
     public class ErrorViewModel
     {

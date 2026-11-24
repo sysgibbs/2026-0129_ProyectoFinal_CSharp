@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-ColegioMVC-a9a0fad4-48fb-48b5-a325-7e9168293f79</UserSecretsId>
+    <UserSecretsId>aspnet-CineMVC-a9a0fad4-48fb-48b5-a325-7e9168293f79</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
