@@ -1,6 +1,6 @@
 ﻿namespace CineMVC.Models.Enums
 {
-    public enum EstadoPago
+    public enum EstadoVenta
     { 
         Pagado = 1,
         Pendiente = 2,

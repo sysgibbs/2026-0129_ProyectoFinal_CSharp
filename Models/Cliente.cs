@@ -12,7 +12,7 @@ namespace CineMVC.Models
 
         public DateTime FechaRegistro { get; set; } = DateTime.Now;
 
-        public ICollection<Pago> Pagos { get; set; } = new List<Pago>();
+        public ICollection<Venta> Ventas { get; set; } = new List<Venta>();
 
     }
 }

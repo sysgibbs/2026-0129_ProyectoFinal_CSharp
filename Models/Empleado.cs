@@ -1,14 +1,19 @@
-﻿namespace CineMVC.Models
+﻿using CineMVC.Data;
+
+namespace CineMVC.Models
 {
-    public class Empleado
-    {
-        public int Id { get; set; }
+	public class Empleado
+	{
+		public int Id { get; set; }
 
-        public int PersonaId { get; set;  }
-        public Persona Persona { get; set; } = null!;
+		public int PersonaId { get; set; }
+		public Persona Persona { get; set; } = null!;
 
-        public string Cargo { get; set; } = string.Empty;
+		public string? ApplicationUserId { get; set; }
+		public ApplicationUser? ApplicationUser { get; set; }
 
-        public ICollection<Pago> PagosRegistrados { get; set; } = new List<Pago>();
-     }
+		public string Cargo { get; set; } = string.Empty;
+
+		public ICollection<Venta> VentasRegistradas { get; set; } = new List<Venta>();
+	}
 }

@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CineMVC.Data.Migrations
+namespace CineMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20261124124924_DominioCine")]
-    partial class DominioCine
+    [Migration("20261126232229_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,6 +120,9 @@ namespace CineMVC.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Cargo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -128,6 +131,10 @@ namespace CineMVC.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique()
+                        .HasFilter("[ApplicationUserId] IS NOT NULL");
 
                     b.HasIndex("PersonaId")
                         .IsUnique();
@@ -151,15 +158,15 @@ namespace CineMVC.Data.Migrations
                     b.Property<int>("FuncionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PagoId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("VentaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PagoId");
+                    b.HasIndex("VentaId");
 
                     b.HasIndex("FuncionId", "Asiento")
                         .IsUnique();
@@ -199,44 +206,6 @@ namespace CineMVC.Data.Migrations
                     b.ToTable("Funciones");
                 });
 
-            modelBuilder.Entity("CineMVC.Models.Pago", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmpleadoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("FechaPago")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MetodoPago")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("MontoTotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("EmpleadoId");
-
-                    b.ToTable("Pagos");
-                });
-
             modelBuilder.Entity("CineMVC.Models.Pelicula", b =>
                 {
                     b.Property<int>("Id")
@@ -258,6 +227,10 @@ namespace CineMVC.Data.Migrations
                     b.Property<string>("Genero")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ImagenUrl")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Sinopsis")
                         .HasMaxLength(500)
@@ -331,6 +304,53 @@ namespace CineMVC.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Salas");
+                });
+
+            modelBuilder.Entity("CineMVC.Models.Venta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodigoConfirmacion")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("EmpleadoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("FechaVenta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MetodoVenta")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<decimal>("MontoTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("CodigoConfirmacion")
+                        .IsUnique();
+
+                    b.HasIndex("EmpleadoId");
+
+                    b.ToTable("Ventas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -483,11 +503,18 @@ namespace CineMVC.Data.Migrations
 
             modelBuilder.Entity("CineMVC.Models.Empleado", b =>
                 {
+                    b.HasOne("CineMVC.Data.ApplicationUser", "ApplicationUser")
+                        .WithOne()
+                        .HasForeignKey("CineMVC.Models.Empleado", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("CineMVC.Models.Persona", "Persona")
                         .WithOne()
                         .HasForeignKey("CineMVC.Models.Empleado", "PersonaId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Persona");
                 });
@@ -500,15 +527,15 @@ namespace CineMVC.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CineMVC.Models.Pago", "Pago")
+                    b.HasOne("CineMVC.Models.Venta", "Venta")
                         .WithMany("Entradas")
-                        .HasForeignKey("PagoId")
+                        .HasForeignKey("VentaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Funcion");
 
-                    b.Navigation("Pago");
+                    b.Navigation("Venta");
                 });
 
             modelBuilder.Entity("CineMVC.Models.Funcion", b =>
@@ -530,16 +557,16 @@ namespace CineMVC.Data.Migrations
                     b.Navigation("Sala");
                 });
 
-            modelBuilder.Entity("CineMVC.Models.Pago", b =>
+            modelBuilder.Entity("CineMVC.Models.Venta", b =>
                 {
                     b.HasOne("CineMVC.Models.Cliente", "Cliente")
-                        .WithMany("Pagos")
+                        .WithMany("Ventas")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CineMVC.Models.Empleado", "Empleado")
-                        .WithMany("PagosRegistrados")
+                        .WithMany("VentasRegistradas")
                         .HasForeignKey("EmpleadoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -602,20 +629,15 @@ namespace CineMVC.Data.Migrations
 
             modelBuilder.Entity("CineMVC.Models.Cliente", b =>
                 {
-                    b.Navigation("Pagos");
+                    b.Navigation("Ventas");
                 });
 
             modelBuilder.Entity("CineMVC.Models.Empleado", b =>
                 {
-                    b.Navigation("PagosRegistrados");
+                    b.Navigation("VentasRegistradas");
                 });
 
             modelBuilder.Entity("CineMVC.Models.Funcion", b =>
-                {
-                    b.Navigation("Entradas");
-                });
-
-            modelBuilder.Entity("CineMVC.Models.Pago", b =>
                 {
                     b.Navigation("Entradas");
                 });
@@ -628,6 +650,11 @@ namespace CineMVC.Data.Migrations
             modelBuilder.Entity("CineMVC.Models.Sala", b =>
                 {
                     b.Navigation("Funciones");
+                });
+
+            modelBuilder.Entity("CineMVC.Models.Venta", b =>
+                {
+                    b.Navigation("Entradas");
                 });
 #pragma warning restore 612, 618
         }

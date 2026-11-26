@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CineMVC.Models
 {
-    public class Pago
+    public class Venta
     {
         public int Id { get; set; }
 
@@ -13,15 +13,18 @@ namespace CineMVC.Models
         public int EmpleadoId { get; set; }
         public Empleado Empleado { get; set; } = null!;
 
-        public DateTime FechaPago { get; set; } = DateTime.Now;
-
+        public DateTime FechaVenta { get; set; } = DateTime.Now;
 
         [Range(typeof(decimal), "0.01", "999999")]
         public decimal MontoTotal { get; set; }
 
-        public string MetodoPago { get; set; } = string.Empty;
+        [Required, StringLength(30)]
+        public string MetodoVenta { get; set; } = string.Empty;
 
-        public EstadoPago Estado { get; set; } = EstadoPago.Pagado;
+        public EstadoVenta Estado { get; set; } = EstadoVenta.Pagado;
+
+        [Required, StringLength(50)]
+        public string CodigoConfirmacion { get; set; } = string.Empty;
 
         public ICollection<Entrada> Entradas { get; set; } = new List<Entrada>();
     }

@@ -18,20 +18,20 @@ namespace CineMVC.Data
         public DbSet<Pelicula> Peliculas { get; set; }
         public DbSet<Sala> Salas { get; set; }
         public DbSet<Funcion> Funciones { get; set; }
-        public DbSet<Pago> Pagos { get; set; }
+        public DbSet<Venta> Ventas { get; set; }
         public DbSet<Entrada> Entradas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            
-            builder.Entity<Pago>()
-                .Property(p => p.MontoTotal)
+            // Precisión decimal
+            builder.Entity<Venta>()
+                .Property(v => v.MontoTotal)
                 .HasColumnType("decimal(18,2)");
 
-            builder.Entity<Pago>()
-                .Property(p => p.Estado)
+            builder.Entity<Venta>()
+                .Property(v => v.Estado)
                 .HasConversion<string>()
                 .HasMaxLength(20);
 
@@ -43,11 +43,11 @@ namespace CineMVC.Data
                 .Property(f => f.PrecioBase)
                 .HasColumnType("decimal(18,2)");
 
-            
+            // Relaciones uno a muchos
             builder.Entity<Entrada>()
-                .HasOne(e => e.Pago)
-                .WithMany(p => p.Entradas)
-                .HasForeignKey(e => e.PagoId)
+                .HasOne(e => e.Venta)
+                .WithMany(v => v.Entradas)
+                .HasForeignKey(e => e.VentaId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Entrada>()
@@ -56,16 +56,16 @@ namespace CineMVC.Data
                 .HasForeignKey(e => e.FuncionId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Pago>()
-                .HasOne(p => p.Cliente)
-                .WithMany(c => c.Pagos)
-                .HasForeignKey(p => p.ClienteId)
+            builder.Entity<Venta>()
+                .HasOne(v => v.Cliente)
+                .WithMany(c => c.Ventas)
+                .HasForeignKey(v => v.ClienteId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Pago>()
-                .HasOne(p => p.Empleado)
-                .WithMany(e => e.PagosRegistrados)
-                .HasForeignKey(p => p.EmpleadoId)
+            builder.Entity<Venta>()
+                .HasOne(v => v.Empleado)
+                .WithMany(e => e.VentasRegistradas)
+                .HasForeignKey(v => v.EmpleadoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Funcion>()
@@ -80,7 +80,7 @@ namespace CineMVC.Data
                 .HasForeignKey(f => f.SalaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
+            // Relaciones uno a uno
             builder.Entity<Cliente>()
                 .HasOne(c => c.Persona)
                 .WithOne()
@@ -93,7 +93,18 @@ namespace CineMVC.Data
                 .HasForeignKey<Empleado>(e => e.PersonaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
+            // Relación Empleado -> ApplicationUser
+            builder.Entity<Empleado>()
+                .HasOne(e => e.ApplicationUser)
+                .WithOne()
+                .HasForeignKey<Empleado>(e => e.ApplicationUserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // Índices únicos
+            builder.Entity<Venta>()
+                .HasIndex(v => v.CodigoConfirmacion)
+                .IsUnique();
+
             builder.Entity<Entrada>()
                 .HasIndex(e => new { e.FuncionId, e.Asiento })
                 .IsUnique();
