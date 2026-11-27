@@ -1,0 +1,27 @@
+﻿@model CineMVC.Models.Pelicula
+
+@{
+    ViewData["Title"] = "Eliminar Película";
+}
+
+<h1 class="text-danger">Eliminar Película</h1>
+<h3>¿Estás seguro de que quieres eliminar esta película?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Título</dt>
+        <dd class="col-sm-9">@Model.Titulo</dd>
+
+        <dt class="col-sm-3">Género</dt>
+        <dd class="col-sm-9">@Model.Genero</dd>
+
+        <dt class="col-sm-3">Duración</dt>
+        <dd class="col-sm-9">@Model.DuracionMin min</dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sí, Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

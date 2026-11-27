@@ -1,6 +1,8 @@
 using CineMVC.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using CineMVC.Services.Interfaces;
+using CineMVC.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options
 => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddScoped<IPeliculaService, PeliculaService>();
+builder.Services.AddScoped<IPersonaService, PersonaService>();
+
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
