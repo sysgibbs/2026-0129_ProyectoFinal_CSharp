@@ -50,10 +50,5 @@ namespace CineMVC.Services.Implementations
                 await _context.SaveChangesAsync();
             }
         }
-
-        public async Task<bool> ExistsAsync(int id)
-        {
-            return await _context.Personas.AnyAsync(p => p.Id == id);
-        }
     }
 }

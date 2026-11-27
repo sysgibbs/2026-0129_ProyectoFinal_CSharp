@@ -9,6 +9,5 @@ namespace CineMVC.Services.Interfaces
         Task CreateAsync(Persona persona);
         Task UpdateAsync(Persona persona);
         Task DeleteAsync(int id);
-        Task<bool> ExistsAsync(int id);
     }
 }

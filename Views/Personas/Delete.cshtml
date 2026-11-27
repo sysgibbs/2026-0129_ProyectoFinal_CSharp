@@ -1,0 +1,24 @@
+﻿@model CineMVC.Models.Persona
+
+@{
+    ViewData["Title"] = "Eliminar Persona";
+}
+
+<h1 class="text-danger">Eliminar Persona</h1>
+<h3>¿Estás seguro de que quieres eliminar a esta persona?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Nombre Completo</dt>
+        <dd class="col-sm-9">@Model.Nombre @Model.Apellido</dd>
+
+        <dt class="col-sm-3">Cédula</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Cedula)</dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sí, Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

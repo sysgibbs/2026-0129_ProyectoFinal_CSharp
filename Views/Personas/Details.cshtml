@@ -1,0 +1,25 @@
+﻿@model CineMVC.Models.Persona
+
+@{
+    ViewData["Title"] = "Detalles de Persona";
+}
+
+<h1>Detalles de Persona</h1>
+<hr />
+<dl class="row">
+    <dt class="col-sm-3">Nombre Completo</dt>
+    <dd class="col-sm-9">@Model.Nombre @Model.Apellido</dd>
+
+    <dt class="col-sm-3">Cédula</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Cedula)</dd>
+
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Email)</dd>
+
+    <dt class="col-sm-3">Teléfono</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Telefono)</dd>
+</dl>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a> |
+    <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+</div>
