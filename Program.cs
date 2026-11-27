@@ -19,6 +19,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options
 
 builder.Services.AddScoped<IPeliculaService, PeliculaService>();
 builder.Services.AddScoped<IPersonaService, PersonaService>();
+builder.Services.AddScoped<ISalaService, SalaService>();
 
 
 var app = builder.Build();
